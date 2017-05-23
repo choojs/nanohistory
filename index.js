@@ -6,7 +6,9 @@ module.exports = history
 // and update router accordingly
 function history (cb) {
   assert.equal(typeof cb, 'function', 'nanohistory: cb must be type function')
-  window.onpopstate = function () {
-    cb(document.location)
+  if (typeof window === 'object' && typeof document === 'object') {
+    window.onpopstate = function () {
+      cb(document.location)
+    }
   }
 }
